@@ -6,9 +6,10 @@ load_dotenv()
 print("Token", os.getenv("HUGGINGFACEHUB_API_TOKEN"))
 
 llm = HuggingFaceEndpoint(
-    # repo_id="HuggingFaceH4/zephyr-7b-beta", # Working but does need API TOKEN
-    repo_id="mradermacher/oh-dcft-v3.1-claude-3-5-sonnet-20241022-GGUF",
-    # repo_id="deepseek-ai/DeepSeek-R1-0528",  # Working but does need API TOKEN
+    # repo_id="HuggingFaceH4/zephyr-7b-beta", # Working, need API TOKEN
+    # repo_id="mradermacher/oh-dcft-v3.1-claude-3-5-sonnet-20241022-GGUF", # Not working
+    repo_id="openai/gpt-oss-120b", # Working with Token and Fast
+    # repo_id="deepseek-ai/DeepSeek-R1-0528",  # Working and need API TOKEN, shows thinking process as well
     task="text-generation",
     max_new_tokens=512,
     do_sample=False,
@@ -17,5 +18,8 @@ llm = HuggingFaceEndpoint(
 )
 
 chat_model = ChatHuggingFace(llm=llm)
-response = chat_model.invoke("What is the capital of France? Reply in one word")
-print(response.content)
+try:
+    response = chat_model.invoke("What is the capital of France? Reply in one word")
+    print(response.content)
+except Exception as e:
+    print("Error:", e)
