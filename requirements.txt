@@ -1,6 +1,10 @@
 langchain
 wikipedia
 langchain-community
+# Add langchain-openai or langchain-anthropic or langchain-huggingface based on the model you want to use
+# langchain-openai
+# langchain-anthropic
 langchain-huggingface
 python-dotenv
-pydantic
+pydantic  
+duckduckgo-search
